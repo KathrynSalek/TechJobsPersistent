@@ -5,9 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using TechJobsPersistent.Data;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace TechJobsPersistent
 {
@@ -24,6 +27,9 @@ namespace TechJobsPersistent
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            //TO DO: Part 1, #6 Check that ConfigureServices in Startup.cs includes the configuration for the database.
+            services.AddDbContext<JobDbContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

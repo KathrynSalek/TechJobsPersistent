@@ -1,12 +1,36 @@
-﻿<h1>Add a Job</h1>
+﻿@using TechJobsPersistent.ViewModels;
+@model AddJobViewModel;
+
+<h1>Add a Job</h1>
 
 <form asp-controller="Home" asp-action="ProcessAddJobForm" method="post">
     <div class="form-group">
-        <label>Name</label>
-        <input class="form-control" />
+        <label asp-for="Name">Job Name</label>                                                      <!--Code I added w/o instruction-->
+        <select class="form-control" asp-for="Name" asp-items="@Model.AllEmployers"></select>       <!--Code I added w/o instruction-->
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name"></span>
         <span></span>
     </div>
 
-    <input type="submit" value="Add Job" />
+    <div class="form-group">
+        <!--TO DO: Part 2 Adding a Job #3 - In AddJob.cshtml, add a new <div class="form-group"> element to the form. This field should be a dropdown menu with all of the employers in the database. In addition, add a link to the <div> element to add new employers. This way, if a user doesn’t see the employer they are looking for, they can easily click on the link and add a new employer to the database.-->
+        <label asp-for="EmployerId">Employer</label> <!--Add the appropriate <label>-->
+        <select class="form-control" asp-for="EmployerId" asp-items="@Model.AllEmployers"></select>
+        <a asp-controller="Employer" asp-action="Add">Add additional employers</a><!--and <input> tags to the new <div> element to create the form field to add employer information to the job.-->
+        <span></span>
+    </div>
+
+        <div class="form-group">
+            <!--TO DO: Part 3 Updating Home/AddJob.cshtml #1 -  Add a new <div class="form-group"> element to the form for collecting skills.-->
+            @foreach (Skill skill in Model.AllSkills)@*TO DO: Part 3 Updating Home/ AddJob.cshtml #2 - Loop through each object in the list of Skill objects.*@
+            {
+                <label>@skill.Name</label>
+                <input type="checkbox" name="SelectedSkills" value="@skill.Id" /> <!--TO DO: Part 3 Updating Home/ AddJob.cshtml #3 - Give each checkbox a label and add the checkbox input itself.-->
+            }
+        </div>
+        <a asp-controller="Skill" asp-action="Add">Add additional skills</a> <!--TO DO: Part 3 Updating Home/AddJob.cshtml #4 Add a link to the form to add skills to the database so if a user doesn’t see the skills they need, they can add skills themselves-->
+
+        <input class="btn btn-primary form-control" type="submit" value="Submit" />
+
 </form>
 

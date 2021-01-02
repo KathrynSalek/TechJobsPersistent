@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 
 namespace TechJobsPersistent.Data
-{
+{ //Part 1, #4 Read through the code that is currently in JobDbContext to get an idea for what the database will look like.
     public class JobDbContext : DbContext
     {
         public DbSet<Job> Jobs { get; set; }
