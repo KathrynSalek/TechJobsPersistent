@@ -66,7 +66,7 @@ namespace TechJobsPersistent.Controllers
                 context.Jobs.Add(newJob); //TO DO: Part 3 Updating HomeController #2c - Add each new JobSkill object to the DbContext object, 
                 context.SaveChanges(); // but do not add an additional call to SaveChanges() inside the loop! One call at the end of the method is enough to get the updated info to the database
 
-                return Redirect("/Home");
+                return Redirect("/Home/");
             }
 
             return View("AddJob", viewModel);
